@@ -11,28 +11,16 @@ function myEach(collection, callback){
     return collection;
 }
 function myMap(collection, callback) {
-    //Create a new array to store transformed values
-    const newArray = [];
-    // Check if the collection is an array
-    if (Array.isArray(collection)) {
-        //Iterate over each value in the array
-        for (let i = 0; i < collection.length; i++){
-            // Apply the callback function to the current value and store the transformed value in the new array
-            newArray.push(callback(collection[i], i, collection));
-        }
-    return newArray;
-    };
-    //Check if the collection is an object
-    if (typeof collection === 'object') {
-        // Get an array of the values in the object
-        const values = Object.values(collection);
-        //Iterate over each value in the array
-        for (let i = 0; i < values.length; i++) {
-            // Apply the callback function to the current value and store the transformed value in the new array
-            newArray.push(callback(values[i], i, values));
-        }
-    return newArray;;
-    };
+  let newArray = [];
+  // Determine if the collection is an object
+  let values = Array.isArray(collection) ? collection : Object.values(collection);
+  // Iterate over each value in the collection
+  for (let i = 0; i < values.length; i++) {
+      // Apply the callback function to the current value and store the transformed value in the new array
+      newArray.push(callback(values[i], i, collection));
+  }
+
+  return newArray;
 }
 
 function myReduce(collection, callback, acc){
